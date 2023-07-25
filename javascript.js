@@ -1,24 +1,54 @@
 //Step 1
 //General goal: Create a function that will return the computer's choice between rock, paper, or scissors
 //Parameters: none
-//Return computerSelection
+//Return the computer's choice
 //Specifics:
-//1. Return a value that's 1,2, or 3. 
-//2. If it's a one, return "rock"
-//3. If it's a two, return "paper"
-//4. If it's a three, return "scissors"
+//1. Return a value that's 0,1, or 2. 
+//2. If it's a zero, return "rock"
+//3. If it's a one, return "paper"
+//4. If it's a two, return "scissors"
 
+function getComputerChoice(){
+   let computerChoice = Math.floor(Math.random() * 3);
+   if (computerChoice === 0){
+    return "rock";
+   } else if (computerChoice === 1){
+    return "paper";
+   } else {
+    return "scissors";
+   }
+}
+
+let computerSelection = getComputerChoice();
+console.log (computerSelection);
 
 
 //Step 2
 //General Goal: Create a function that will return the user's choice between rock, paper, or scissors
 //Parameters: none
-//Return playerSelection
+//Return player's choice
 //Specifics:
 //1. Prompt the user for a choice between the three
 //2. Convert the user's input all to lowercase, so that capitalization is consistent across all inputs
 //3. If user fails to return any of the three options, prompt the user to return a correct answer
 //4. Return the user's input
+
+function getPlayerChoice(){
+
+    let playerChoice = prompt("Please enter rock, paper, or scissors");
+    playerChoice = playerChoice.toLowerCase();
+    while (playerChoice!="rock" && playerChoice!="paper" && playerChoice!="scissors"){
+        playerChoice = prompt("You can only enter rock, paper, or scissors");
+        playerChoice = playerChoice.toLowerCase();
+    }
+    return playerChoice;
+
+}
+
+let playerSelection = getPlayerChoice();
+console.log(playerSelection);
+
+
 
 //Step 3
 //General goal: Play a round of rock paper scissors using the results from step 1 and step 2.
@@ -35,6 +65,34 @@
 //7. if player chooses scissors and computer chooses scissors, return "tie"
 //8. if player chooses scissors and computer chooses rock, return "computer win"
 //9 if player chooses scissors and computer chooses paper, return, "player win"
+
+function playRound(player, computer){
+    if(player == "rock" && computer == "rock"){
+        return "tie";
+    } else if(player == "rock" && computer == "paper"){
+        return"computer win";
+    } else if(player == "rock" && computer == "scissors"){
+        return"player win";
+    } else if(player == "paper" && computer == "paper"){
+        return"tie";
+    } else if(player == "paper" && computer == "scissors"){
+        return"computer win";
+    } else if(player == "paper" && computer == "rock"){
+        return"player win";
+    } else if(player == "scissors" && computer == "scissors"){
+        return"tie";
+    } else if(player == "scissors" && computer == "rock"){
+        return"computer win";
+    } else if(player == "scissors" && computer == "paper"){
+        return"player win";
+    }
+}
+
+
+
+console.log(playRound(playerSelection, computerSelection));
+
+
 
 //Step 4
 //General goal: create a function that repeats step three until either the computer or player achieves 5 wins
