@@ -23,8 +23,7 @@ function getComputerChoice(){
    
 }
 
-// let computerSelection = getComputerChoice();
-// console.log (computerSelection);
+
 
 
 //Step 2
@@ -50,8 +49,7 @@ function getPlayerChoice(){
 
 }
 
-// let playerSelection = getPlayerChoice();
-// console.log(playerSelection);
+
 
 
 
@@ -94,7 +92,7 @@ function playRound(player, computer){
 }
 
 
-// console.log(playRound(getPlayerChoice(), getComputerChoice()));
+
 
 
 
@@ -136,11 +134,7 @@ function gameResult(){
     }
     
 
-    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
-    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
-    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
-    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
-    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
+    
 }
 
 gameResult();
