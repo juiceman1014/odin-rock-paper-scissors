@@ -11,16 +11,20 @@
 function getComputerChoice(){
    let computerChoice = Math.floor(Math.random() * 3);
    if (computerChoice === 0){
+    console.log("Computer chose rock");
     return "rock";
    } else if (computerChoice === 1){
+    console.log("Computer chose paper");
     return "paper";
    } else {
+    console.log("Computer chose scissors");
     return "scissors";
    }
+   
 }
 
-let computerSelection = getComputerChoice();
-console.log (computerSelection);
+// let computerSelection = getComputerChoice();
+// console.log (computerSelection);
 
 
 //Step 2
@@ -41,12 +45,13 @@ function getPlayerChoice(){
         playerChoice = prompt("You can only enter rock, paper, or scissors");
         playerChoice = playerChoice.toLowerCase();
     }
+    console.log(`You chose ${playerChoice}`);
     return playerChoice;
 
 }
 
-let playerSelection = getPlayerChoice();
-console.log(playerSelection);
+// let playerSelection = getPlayerChoice();
+// console.log(playerSelection);
 
 
 
@@ -68,29 +73,28 @@ console.log(playerSelection);
 
 function playRound(player, computer){
     if(player == "rock" && computer == "rock"){
-        return "tie";
+        return "It's a tie";
     } else if(player == "rock" && computer == "paper"){
-        return"computer win";
+        return"The computer won";
     } else if(player == "rock" && computer == "scissors"){
-        return"player win";
+        return"You won";
     } else if(player == "paper" && computer == "paper"){
-        return"tie";
+        return"It's a tie";
     } else if(player == "paper" && computer == "scissors"){
-        return"computer win";
+        return"The computer won";
     } else if(player == "paper" && computer == "rock"){
-        return"player win";
+        return"You won";
     } else if(player == "scissors" && computer == "scissors"){
-        return"tie";
+        return"It's a tie";
     } else if(player == "scissors" && computer == "rock"){
-        return"computer win";
+        return"The computer won";
     } else if(player == "scissors" && computer == "paper"){
-        return"player win";
+        return"You won";
     }
 }
 
 
-
-console.log(playRound(playerSelection, computerSelection));
+// console.log(playRound(getPlayerChoice(), getComputerChoice()));
 
 
 
@@ -100,8 +104,43 @@ console.log(playRound(playerSelection, computerSelection));
 //Parameters: none
 //Return: gameWinner
 //Specifics:
-//1. while winCounterPlayer or winCounterComputer has not reached five
-    //1. if function from step 3 returns "player win" add one to winCounterPlayer
-    //2. if function from step 3 returns "computer win" add one to winCounterComputer
-    //3. else, add 0 to both winCounterPlayer and winCounterComputer
-//2. if winCounterPlayer === 5, then return "Player Wins Game" || if winCounterComputer ===, then return "Computer Wins Game"
+//1. Create a for loop that runs five times.
+    //1. If playRound = tie, then add 0 to both counters
+    //2. If playRound = computer win, add 1 to computer counter
+    //3. If playRound = player win, add 1 to player counter
+//2. Compare player and computer counter
+    //1.If player > computer, return player wins game
+    //2. If player < computer, return computer wins game
+
+function gameResult(){
+    let playerCounter = 0;
+    let computerCounter = 0;
+
+    for(let i = 0; i < 5; i++){
+        let result = playRound(getPlayerChoice(), getComputerChoice());
+        console.log(result);
+        if (result == "It's a tie"){
+            playerCounter = playerCounter + 0;
+            computerCounter = computerCounter + 0;
+        } else if (result == "You won"){
+            ++playerCounter;
+        } else{
+            ++computerCounter;
+        }
+    }
+
+    if (playerCounter > computerCounter){
+        console.log(`The result is ${playerCounter}-${computerCounter}. You have won the game!`)
+    } else{
+        console.log(`The result is ${playerCounter}-${computerCounter}. The computer has beat you!`)
+    }
+    
+
+    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
+    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
+    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
+    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
+    // console.log(playRound(getPlayerChoice(), getComputerChoice()));
+}
+
+gameResult();
