@@ -11,13 +11,13 @@
 function getComputerChoice(){
    let computerChoice = Math.floor(Math.random() * 3);
    if (computerChoice === 0){
-    console.log("Computer chose rock");
+    computerChoiceDiv.textContent = "Computer chose rock";
     return "rock";
    } else if (computerChoice === 1){
-    console.log("Computer chose paper");
+    computerChoiceDiv.textContent = "Computer chose paper";
     return "paper";
    } else {
-    console.log("Computer chose scissors");
+    computerChoiceDiv.textContent = "Computer chose scissors";
     return "scissors";
    }
    
@@ -70,23 +70,35 @@ function getPlayerChoice(){
 //9 if player chooses scissors and computer chooses paper, return, "player win"
 
 function playRound(player, computer){
+   
+    
+
     if(player == "rock" && computer == "rock"){
+        roundOutcomeDiv.textContent = "It's a tie";
         return "It's a tie";
     } else if(player == "rock" && computer == "paper"){
+        roundOutcomeDiv.textContent = "The computer won";
         return"The computer won";
     } else if(player == "rock" && computer == "scissors"){
+        roundOutcomeDiv.textContent = "You won";
         return"You won";
     } else if(player == "paper" && computer == "paper"){
+        roundOutcomeDiv.textContent = "It's a tie";
         return"It's a tie";
     } else if(player == "paper" && computer == "scissors"){
+        roundOutcomeDiv.textContent = "The computer won";
         return"The computer won";
     } else if(player == "paper" && computer == "rock"){
+        roundOutcomeDiv.textContent = "You won";
         return"You won";
     } else if(player == "scissors" && computer == "scissors"){
+        roundOutcomeDiv.textContent = "It's a tie";
         return"It's a tie";
     } else if(player == "scissors" && computer == "rock"){
+        roundOutcomeDiv.textContent = "The computer won";
         return"The computer won";
     } else if(player == "scissors" && computer == "paper"){
+        roundOutcomeDiv.textContent = "You won";
         return"You won";
     }
 }
@@ -110,31 +122,123 @@ function playRound(player, computer){
     //1.If player > computer, return player wins game
     //2. If player < computer, return computer wins game
 
-function gameResult(){
-    let playerCounter = 0;
-    let computerCounter = 0;
+// function gameResult(){
+//     let playerCounter = 0;
+//     let computerCounter = 0;
 
-    while(playerCounter != 5 && computerCounter != 5){
-        let result = playRound(getPlayerChoice(), getComputerChoice());
-        console.log(result);
-        if (result == "It's a tie"){
-            playerCounter = playerCounter + 0;
-            computerCounter = computerCounter + 0;
-        } else if (result == "You won"){
-            ++playerCounter;
-        } else{
-            ++computerCounter;
-        }
-    }
+//     while(playerCounter != 5 && computerCounter != 5){
+//         let result = playRound(getPlayerChoice(), getComputerChoice());
+//         console.log(result);
+//         if (result == "It's a tie"){
+//             playerCounter = playerCounter + 0;
+//             computerCounter = computerCounter + 0;
+//         } else if (result == "You won"){
+//             ++playerCounter;
+//         } else{
+//             ++computerCounter;
+//         }
+//     }
 
-    if (playerCounter > computerCounter){
-        console.log(`The result is ${playerCounter}-${computerCounter}. You have won the game!`)
+//     if (playerCounter > computerCounter){
+//         console.log(`The result is ${playerCounter}-${computerCounter}. You have won the game!`)
+//     } else{
+//         console.log(`The result is ${playerCounter}-${computerCounter}. The computer has beat you!`)
+//     }
+    
+
+    
+// }
+
+// gameResult();
+
+//Step 2: create three buttons, one for each selection. Add an event listener
+//to the buttons that call your playRound function with the correct
+//playerSelection everytime a button is clicked 
+
+//Button one: rock
+//pressing this button should log the user's input as rock correctly
+//execute the game
+
+const body = document.body;
+
+const rockButton = document.createElement("button");
+rockButton.classList.add("rockButton");
+rockButton.textContent = "Rock";
+body.appendChild(rockButton);
+
+rockButton.addEventListener("click", function(){
+
+    playerChoiceDiv.textContent = "You chose rock";
+
+    let playerChoice = "rock";
+    let computerChoice = getComputerChoice();
+    
+    let result = playRound(playerChoice, getComputerChoice());
+    if(result=="You won"){
+        console.log("You won");
     } else{
-        console.log(`The result is ${playerCounter}-${computerCounter}. The computer has beat you!`)
+        console.log("You lost")
     }
+
+});
+
+
+
+
+//Button two: paper
+
+const paperButton = document.createElement("button");
+paperButton.classList.add("paperButton");
+paperButton.textContent = "Paper";
+body.appendChild(paperButton);
+
+paperButton.addEventListener("click", function(){
+
+    playerChoiceDiv.textContent = "You chose paper";
+
+    let playerChoice = "paper";
+    let computerChoice = getComputerChoice();
     
+    playRound(playerChoice, getComputerChoice());
+
+});
+
+
+//Button three: scissors
+
+const scissorsButton = document.createElement("button");
+scissorsButton.classList.add("scissorsButton");
+scissorsButton.textContent = "Scissors";
+body.appendChild(scissorsButton);
+
+scissorsButton.addEventListener("click", function(){
+
+    playerChoiceDiv.textContent = "You chose scissors";
+
+    let playerChoice = "scissors";
+    let computerChoice = getComputerChoice();
+    
+    playRound(playerChoice, getComputerChoice());
 
     
-}
 
-gameResult();
+});
+
+//Add a div for displaying results and change all of your console.logs into DOM 
+//methods
+
+const roundOutcomeDiv = document.createElement("div")
+roundOutcomeDiv.classList.add("roundOutcomeDiv")
+body.appendChild(roundOutcomeDiv);
+
+const computerChoiceDiv = document.createElement("div")
+computerChoiceDiv.classList.add("computerChoiceDiv")
+body.appendChild(computerChoiceDiv);
+
+const playerChoiceDiv = document.createElement("div")
+playerChoiceDiv.classList.add("playerChoiceDiv")
+body.appendChild(playerChoiceDiv);
+
+const counterDiv = document.createElement("div")
+counterDiv.classList.add("counterDiv")
+body.appendChild(counterDiv);
