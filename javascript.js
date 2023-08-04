@@ -114,7 +114,7 @@ function gameResult(){
     let playerCounter = 0;
     let computerCounter = 0;
 
-    for(let i = 0; i < 5; i++){
+    while(playerCounter != 5 && computerCounter != 5){
         let result = playRound(getPlayerChoice(), getComputerChoice());
         console.log(result);
         if (result == "It's a tie"){
