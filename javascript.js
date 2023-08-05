@@ -104,13 +104,17 @@ function playRound(player, computer){
 }
 
 //Additional function: this function will keep track of how many rounds the computer
-//or the player has won. Once someone hits five points, terminate the page's functionality
+//or the player has won. Once someone hits five points, disable the buttons
 //and ask the user to refresh.
 //parameters: the result of who won
-//returns: the result counter
 //specific:
 //1. if computer wins, add one to the computerCounter
 //2. if player wins, add one to the playerCounter
+
+function promptReferesh(){
+    const refreshMessage = "Please refresh the page to continue."
+    alert(refreshMessage);
+}
 
 let computerCounter = 0;
 let playerCounter = 0;
@@ -120,14 +124,14 @@ function roundCounter(roundResult){
 
     //if user wins and neither counter is equal to five add one to player counter
     if(roundResult == "You won" && (computerCounter != 5 && playerCounter !=5)){
-        ++playerCounter
+        ++playerCounter;
         counterDiv.textContent = `${playerCounter}-${computerCounter}`;
     }else if(roundResult == "The computer won" && (computerCounter != 5 && playerCounter !=5)){
         ++computerCounter;
         counterDiv.textContent = `${playerCounter}-${computerCounter}`;
     }else if(roundResult == "It's a tie" && (computerCounter != 5 && playerCounter !=5)){
-        playerCounter = playerCounter + 0;
-        computerCounter = computerCounter + 0;
+        playerCounter += 0;
+        computerCounter += 0;
         counterDiv.textContent = `${playerCounter}-${computerCounter}`;
     }
     
@@ -139,6 +143,18 @@ function roundCounter(roundResult){
     
 }
 
+function checkCounter(){
+
+    if(computerCounter == 5 || playerCounter == 5){
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorsButton.disabled = true;
+        promptReferesh();
+    }
+
+    
+
+}
 
 
 
@@ -211,6 +227,7 @@ rockButton.addEventListener("click", function(){
     let result = playRound(playerChoice, getComputerChoice());
 
     roundCounter(result);
+    checkCounter();
     
 
 });
@@ -234,6 +251,8 @@ paperButton.addEventListener("click", function(){
     
     let result = playRound(playerChoice, getComputerChoice());
 
+    roundCounter(result);
+
 });
 
 
@@ -253,7 +272,7 @@ scissorsButton.addEventListener("click", function(){
     
     let result = playRound(playerChoice, getComputerChoice());
 
-    //throw result as an argument into the counter function
+    roundCounter(result);
 
     
 
