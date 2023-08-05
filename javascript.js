@@ -103,7 +103,41 @@ function playRound(player, computer){
     }
 }
 
+//Additional function: this function will keep track of how many rounds the computer
+//or the player has won. Once someone hits five points, terminate the page's functionality
+//and ask the user to refresh.
+//parameters: the result of who won
+//returns: the result counter
+//specific:
+//1. if computer wins, add one to the computerCounter
+//2. if player wins, add one to the playerCounter
 
+let computerCounter = 0;
+let playerCounter = 0;
+
+function roundCounter(roundResult){
+
+
+    //if user wins and neither counter is equal to five add one to player counter
+    if(roundResult == "You won" && (computerCounter != 5 && playerCounter !=5)){
+        ++playerCounter
+        counterDiv.textContent = `${playerCounter}-${computerCounter}`;
+    }else if(roundResult == "The computer won" && (computerCounter != 5 && playerCounter !=5)){
+        ++computerCounter;
+        counterDiv.textContent = `${playerCounter}-${computerCounter}`;
+    }else if(roundResult == "It's a tie" && (computerCounter != 5 && playerCounter !=5)){
+        playerCounter = playerCounter + 0;
+        computerCounter = computerCounter + 0;
+        counterDiv.textContent = `${playerCounter}-${computerCounter}`;
+    }
+    
+        //else if computer wins and neither counter is equal to five add one to computer counter
+        //else if it's a tie and neither counter is equal to five add 0 to both counters
+        
+    
+
+    
+}
 
 
 
@@ -172,13 +206,12 @@ rockButton.addEventListener("click", function(){
 
     let playerChoice = "rock";
     let computerChoice = getComputerChoice();
+
     
     let result = playRound(playerChoice, getComputerChoice());
-    if(result=="You won"){
-        console.log("You won");
-    } else{
-        console.log("You lost")
-    }
+
+    roundCounter(result);
+    
 
 });
 
@@ -199,7 +232,7 @@ paperButton.addEventListener("click", function(){
     let playerChoice = "paper";
     let computerChoice = getComputerChoice();
     
-    playRound(playerChoice, getComputerChoice());
+    let result = playRound(playerChoice, getComputerChoice());
 
 });
 
@@ -218,7 +251,9 @@ scissorsButton.addEventListener("click", function(){
     let playerChoice = "scissors";
     let computerChoice = getComputerChoice();
     
-    playRound(playerChoice, getComputerChoice());
+    let result = playRound(playerChoice, getComputerChoice());
+
+    //throw result as an argument into the counter function
 
     
 
