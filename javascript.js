@@ -1,5 +1,4 @@
-//Step 1
-//General goal: Create a function that will return the computer's choice between rock, paper, or scissors
+//General: Create a function that will return the computer's choice between rock, paper, or scissors
 //Parameters: none
 //Return the computer's choice
 //Specifics:
@@ -23,11 +22,7 @@ function getComputerChoice(){
    
 }
 
-
-
-
-//Step 2
-//General Goal: Create a function that will return the user's choice between rock, paper, or scissors
+//General: Create a function that will return the user's choice between rock, paper, or scissors
 //Parameters: none
 //Return player's choice
 //Specifics:
@@ -49,12 +44,7 @@ function getPlayerChoice(){
 
 }
 
-
-
-
-
-//Step 3
-//General goal: Play a round of rock paper scissors using the results from step 1 and step 2.
+//General: Play a round of rock paper scissors using the results from step 1 and step 2.
 //To do so, I have to create all possiblities of a game of rock paper scissors
 //Parameters: computerSelection, playerSelection
 //Return: roundWinner
@@ -71,8 +61,6 @@ function getPlayerChoice(){
 
 function playRound(player, computer){
    
-    
-
     if(player == "rock" && computer == "rock"){
         roundOutcomeDiv.textContent = "It's a tie";
         return "It's a tie";
@@ -103,7 +91,7 @@ function playRound(player, computer){
     }
 }
 
-//Additional function: this function will keep track of how many rounds the computer
+//General: this function will keep track of how many rounds the computer
 //or the player has won. Once someone hits five points, disable the buttons
 //and ask the user to refresh.
 //parameters: the result of who won
@@ -111,10 +99,6 @@ function playRound(player, computer){
 //1. if computer wins, add one to the computerCounter
 //2. if player wins, add one to the playerCounter
 
-function promptReferesh(){
-    const refreshMessage = "Please refresh the page to continue."
-    alert(refreshMessage);
-}
 
 let computerCounter = 0;
 let playerCounter = 0;
@@ -134,13 +118,7 @@ function roundCounter(roundResult){
         computerCounter += 0;
         counterDiv.textContent = `${playerCounter}-${computerCounter}`;
     }
-    
-        //else if computer wins and neither counter is equal to five add one to computer counter
-        //else if it's a tie and neither counter is equal to five add 0 to both counters
-        
-    
-
-    
+       
 }
 
 function checkCounter(){
@@ -149,7 +127,8 @@ function checkCounter(){
         rockButton.disabled = true;
         paperButton.disabled = true;
         scissorsButton.disabled = true;
-        promptReferesh();
+        refreshDiv.textContent = "Please refresh the page to keep playing";
+        
     }
 
     
@@ -158,50 +137,7 @@ function checkCounter(){
 
 
 
-//Step 4
-//General goal: create a function that repeats step three until either the computer or player achieves 5 wins
-//To do so, I have to create a counter that adds to itself every time someone wins
-//Parameters: none
-//Return: gameWinner
-//Specifics:
-//1. Create a for loop that runs five times.
-    //1. If playRound = tie, then add 0 to both counters
-    //2. If playRound = computer win, add 1 to computer counter
-    //3. If playRound = player win, add 1 to player counter
-//2. Compare player and computer counter
-    //1.If player > computer, return player wins game
-    //2. If player < computer, return computer wins game
-
-// function gameResult(){
-//     let playerCounter = 0;
-//     let computerCounter = 0;
-
-//     while(playerCounter != 5 && computerCounter != 5){
-//         let result = playRound(getPlayerChoice(), getComputerChoice());
-//         console.log(result);
-//         if (result == "It's a tie"){
-//             playerCounter = playerCounter + 0;
-//             computerCounter = computerCounter + 0;
-//         } else if (result == "You won"){
-//             ++playerCounter;
-//         } else{
-//             ++computerCounter;
-//         }
-//     }
-
-//     if (playerCounter > computerCounter){
-//         console.log(`The result is ${playerCounter}-${computerCounter}. You have won the game!`)
-//     } else{
-//         console.log(`The result is ${playerCounter}-${computerCounter}. The computer has beat you!`)
-//     }
-    
-
-    
-// }
-
-// gameResult();
-
-//Step 2: create three buttons, one for each selection. Add an event listener
+//General: create three buttons, one for each selection. Add an event listener
 //to the buttons that call your playRound function with the correct
 //playerSelection everytime a button is clicked 
 
@@ -232,9 +168,6 @@ rockButton.addEventListener("click", function(){
 
 });
 
-
-
-
 //Button two: paper
 
 const paperButton = document.createElement("button");
@@ -252,6 +185,7 @@ paperButton.addEventListener("click", function(){
     let result = playRound(playerChoice, getComputerChoice());
 
     roundCounter(result);
+    checkCounter();
 
 });
 
@@ -273,26 +207,27 @@ scissorsButton.addEventListener("click", function(){
     let result = playRound(playerChoice, getComputerChoice());
 
     roundCounter(result);
-
+    checkCounter();
     
 
 });
 
-//Add a div for displaying results and change all of your console.logs into DOM 
-//methods
-
-const roundOutcomeDiv = document.createElement("div")
-roundOutcomeDiv.classList.add("roundOutcomeDiv")
+const roundOutcomeDiv = document.createElement("div");
+roundOutcomeDiv.classList.add("roundOutcomeDiv");
 body.appendChild(roundOutcomeDiv);
 
-const computerChoiceDiv = document.createElement("div")
-computerChoiceDiv.classList.add("computerChoiceDiv")
+const computerChoiceDiv = document.createElement("div");
+computerChoiceDiv.classList.add("computerChoiceDiv");
 body.appendChild(computerChoiceDiv);
 
-const playerChoiceDiv = document.createElement("div")
-playerChoiceDiv.classList.add("playerChoiceDiv")
+const playerChoiceDiv = document.createElement("div");
+playerChoiceDiv.classList.add("playerChoiceDiv");
 body.appendChild(playerChoiceDiv);
 
-const counterDiv = document.createElement("div")
-counterDiv.classList.add("counterDiv")
+const counterDiv = document.createElement("div");
+counterDiv.classList.add("counterDiv");
 body.appendChild(counterDiv);
+
+const refreshDiv = document.createElement("div");
+refreshDiv.classList.add("refreshDiv");
+body.appendChild(refreshDiv);
